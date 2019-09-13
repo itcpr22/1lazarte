@@ -72,6 +72,8 @@ public class Home extends javax.swing.JFrame {
         add = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        ADD.setMinimumSize(new java.awt.Dimension(250, 250));
+
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jButton5.setBackground(new java.awt.Color(51, 255, 204));
@@ -160,6 +162,8 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        UPS.setMinimumSize(new java.awt.Dimension(250, 300));
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 204));
 
@@ -298,7 +302,7 @@ public class Home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Product", "Price", "Quantity"
+                "Id", "ProductName", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -311,6 +315,11 @@ public class Home extends javax.swing.JFrame {
         });
         tablesm.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablesm);
+        if (tablesm.getColumnModel().getColumnCount() > 0) {
+            tablesm.getColumnModel().getColumn(1).setResizable(false);
+            tablesm.getColumnModel().getColumn(2).setResizable(false);
+            tablesm.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         sis.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         sis.setForeground(new java.awt.Color(255, 255, 255));
@@ -413,15 +422,15 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void serKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyPressed
-        searchproduct();       // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_serKeyPressed
 
     private void serKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyReleased
-        searchproduct();       // TODO add your handling code here:
+             // TODO add your handling code here:
     }//GEN-LAST:event_serKeyReleased
 
     private void serKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyTyped
-        searchproduct();       // TODO add your handling code here:
+             // TODO add your handling code here:
     }//GEN-LAST:event_serKeyTyped
 
     private void upssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upssActionPerformed
@@ -456,48 +465,49 @@ public class Home extends javax.swing.JFrame {
         if (selRow != -1) {
             int column = 0;
             String ID = tablesm
-            .getValueAt(selRow, column).toString();
+                    .getValueAt(selRow, column).toString();
             int ans = JOptionPane.showConfirmDialog(rootPane,
-                "Are you sure you want to DELETE this Product?",
-                "Delete Confirmation",
-                JOptionPane.YES_NO_OPTION);
+                    "Are you sure you want to DELETE this Product?",
+                    "Delete Confirmation",
+                    JOptionPane.YES_NO_OPTION);
 
             if (ans == JOptionPane.YES_OPTION) {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     String conURL = "jdbc:mysql://localhost/loginact"
-                    + "?user=root&password=";
+                            + "?user=root&password=";
                     Connection con = DriverManager.getConnection(conURL);
-                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM name"
-                        + "WHERE ID = ? ");
+                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM prodtable "
+                            + "WHERE ID = ? ");
                     pstmt.setString(1, ID);
                     pstmt.executeUpdate();
 
                     JOptionPane.showMessageDialog(rootPane, "1 Row has Succesfully Deleted");
-                    loadproduct();
+                    
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Please select the row to be Deleted!",
-                "No Row Selected",
-                JOptionPane.WARNING_MESSAGE);
+                    "No Row Selected",
+                    JOptionPane.WARNING_MESSAGE);
 
         }
     }//GEN-LAST:event_deleteActionPerformed
-
+    
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         PN1.requestFocusInWindow();
         ADD.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_addActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        searchproduct();       // TODO add your handling code here:
+           // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        ADD();// TODO add your handling code here:
+        ADD();
+        ADD.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void QNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QNActionPerformed
@@ -600,8 +610,8 @@ public void ADD() {
             String conURL = "jdbc:mysql://localhost/loginact"
                     + "?user=root&password=";
             Connection con = DriverManager.getConnection(conURL);
-            PreparedStatement pstmt = con.prepareStatement("insert into name"
-                    + " (productName,price,Quality) "
+            PreparedStatement pstmt = con.prepareStatement("insert into prodtable"
+                    + " (Product,Price,Quantity) "
                     + "values (?,?,?)");
             pstmt.setString(1, sPN);
             pstmt.setString(2, sPR);
@@ -625,7 +635,7 @@ public void ADD() {
             String conURL = "jdbc:mysql://localhost/loginact"
                     + "?user=root&password=";
             Connection con = DriverManager.getConnection(conURL);
-            PreparedStatement pstmt = con.prepareStatement("select * from name");
+            PreparedStatement pstmt = con.prepareStatement("select * from prodtable");
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -633,10 +643,10 @@ public void ADD() {
             tblmodel.setRowCount(0);
             while (rs.next()) {
                 tblmodel.addRow(new Object[]{
-                    rs.getString("id"),
-                    rs.getString("productName"),
-                    rs.getString("price"),
-                    rs.getString("Quality")
+                    rs.getString("ID"),
+                    rs.getString("Product"),
+                    rs.getString("Price"),
+                    rs.getString("Quantity")
                 });
 
             }
@@ -655,28 +665,27 @@ public void ADD() {
         if (sPN1.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill the Product Name!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
             PN1.requestFocusInWindow();
-        } else if (sPRI.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the Price of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
-            PRI.requestFocusInWindow();
         } else if (sQQ.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill the Quantity of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
             QQ.requestFocusInWindow();
-        }
+        } else if (sPRI.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Price of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            PRI.requestFocusInWindow();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String conURL = "jdbc:mysql://localhost/loginact"
                     + "?user=root&password=";
             Connection con = DriverManager.getConnection(conURL);
-            PreparedStatement pstmt = con.prepareStatement("update name"
+            PreparedStatement pstmt = con.prepareStatement("update prodtable"
                     + "set"
-                    + " productName=?,"
-                    + " price=?,"
-                    + " Quality=? "
-                    + "where id=?");
-            pstmt.setString(1, sIDD);
-            pstmt.setString(2, sPN1);
+                    + " Product=?,"
+                    + " Price=?,"
+                    + " Quantity=? "
+                    + "where ID=?");
+            pstmt.setString(1, sPN1);
+            pstmt.setString(2, sQQ);
             pstmt.setString(3, sPRI);
-            pstmt.setString(4, sQQ);
+            pstmt.setString(4, sIDD);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, sPN1 + "  Successfully Updated");
             loadproduct();
@@ -687,41 +696,5 @@ public void ADD() {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    public void searchproduct() {
-        String ssearch = ser.getText();
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String conURL = "jdbc:mysql://localhost/loginact?"
-                    + "user=root&password=";
-            Connection con = DriverManager.getConnection(conURL);
-
-            String query = "(select * from tablesm "
-                    + "where product like ? )";
-            query = query + " ORDER BY product ";
-            PreparedStatement pstmt = con.prepareStatement(query);
-
-            pstmt.setString(1, "%" + ssearch + "%");
-
-            ResultSet rs = pstmt.executeQuery();
-
-            DefaultTableModel tblmodel = (DefaultTableModel) tablesm.getModel();
-            tblmodel.setRowCount(0);
-            while (rs.next()) {
-                tblmodel.addRow(new Object[]{rs.getString("id"),
-                    rs.getString("productName"),
-                    rs.getString("price"),
-                    rs.getString("Quality"),});
-            }
-
-            sis.setText(tablesm.getRowCount() + "");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    }    }
 }
-
-
