@@ -1,5 +1,13 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,15 +41,307 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        ADD = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        QN = new javax.swing.JTextField();
+        PR = new javax.swing.JTextField();
+        PN = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        UPS = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        QQ = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        IDD = new javax.swing.JLabel();
+        PN1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        PRI = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        ser = new javax.swing.JTextField();
+        upss = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablesm = new javax.swing.JTable();
+        sis = new javax.swing.JLabel();
+        delete = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+
+        jButton5.setBackground(new java.awt.Color(51, 255, 204));
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Add");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Quantity :");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Product Name :");
+
+        QN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        QN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QNActionPerformed(evt);
+            }
+        });
+
+        PR.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        PN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Price :");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PN, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(PR)
+                            .addComponent(QN))
+                        .addContainerGap())))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(PR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(QN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ADDLayout = new javax.swing.GroupLayout(ADD.getContentPane());
+        ADD.getContentPane().setLayout(ADDLayout);
+        ADDLayout.setHorizontalGroup(
+            ADDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ADDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        ADDLayout.setVerticalGroup(
+            ADDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ADDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel3.setBackground(new java.awt.Color(153, 255, 204));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Price :");
+
+        QQ.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        QQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QQActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Id :");
+
+        IDD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        PN1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Quantity :");
+
+        PRI.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jButton7.setBackground(new java.awt.Color(0, 204, 0));
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Add");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Product Name :");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PRI, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(PN1)
+                            .addComponent(QQ)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(IDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PN1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PRI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(QQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout UPSLayout = new javax.swing.GroupLayout(UPS.getContentPane());
+        UPS.getContentPane().setLayout(UPSLayout);
+        UPSLayout.setHorizontalGroup(
+            UPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UPSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        UPSLayout.setVerticalGroup(
+            UPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UPSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 0));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel1.setText("               WELCOME HOME");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Size :");
+
+        ser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                serKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                serKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                serKeyTyped(evt);
+            }
+        });
+
+        upss.setBackground(new java.awt.Color(0, 0, 153));
+        upss.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        upss.setText("Update");
+        upss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upssActionPerformed(evt);
+            }
+        });
+
+        tablesm.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Product", "Price", "Quantity"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablesm.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablesm);
+
+        sis.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        sis.setForeground(new java.awt.Color(255, 255, 255));
+        sis.setText("0");
+
+        delete.setBackground(new java.awt.Color(204, 0, 0));
+        delete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
+        add.setBackground(new java.awt.Color(102, 255, 255));
+        add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        add.setText("ADD");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setText("Search :");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -49,15 +349,47 @@ public class Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(sis, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(ser)
+                                .addGap(14, 14, 14)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(upss, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(ser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(sis))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(upss)
+                    .addComponent(add)
+                    .addComponent(delete))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -73,12 +405,113 @@ public class Home extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void serKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyPressed
+        searchproduct();       // TODO add your handling code here:
+    }//GEN-LAST:event_serKeyPressed
+
+    private void serKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyReleased
+        searchproduct();       // TODO add your handling code here:
+    }//GEN-LAST:event_serKeyReleased
+
+    private void serKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_serKeyTyped
+        searchproduct();       // TODO add your handling code here:
+    }//GEN-LAST:event_serKeyTyped
+
+    private void upssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upssActionPerformed
+        int selRow = tablesm.getSelectedRow();
+        if (selRow != -1) {
+            String tid = tablesm
+            .getValueAt(selRow, 0).toString();
+            String tpr = tablesm
+            .getValueAt(selRow, 1).toString();
+            String tp = tablesm
+            .getValueAt(selRow, 2).toString();
+            String tqt = tablesm
+            .getValueAt(selRow, 3).toString();
+
+            IDD.setText(tid);
+            PN1.setText(tpr);
+            PRI.setText(tp);
+            QQ.setText(tqt);
+
+            UPS.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select the row to be Updated!",
+                "No row selected",
+                JOptionPane.WARNING_MESSAGE);
+
+        }       // TODO add your handling code here:
+    }//GEN-LAST:event_upssActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        int selRow = tablesm.getSelectedRow();
+        if (selRow != -1) {
+            int column = 0;
+            String ID = tablesm
+            .getValueAt(selRow, column).toString();
+            int ans = JOptionPane.showConfirmDialog(rootPane,
+                "Are you sure you want to DELETE this Product?",
+                "Delete Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+            if (ans == JOptionPane.YES_OPTION) {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String conURL = "jdbc:mysql://localhost/loginact"
+                    + "?user=root&password=";
+                    Connection con = DriverManager.getConnection(conURL);
+                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM name"
+                        + "WHERE ID = ? ");
+                    pstmt.setString(1, ID);
+                    pstmt.executeUpdate();
+
+                    JOptionPane.showMessageDialog(rootPane, "1 Row has Succesfully Deleted");
+                    loadproduct();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select the row to be Deleted!",
+                "No Row Selected",
+                JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        PN1.requestFocusInWindow();
+        ADD.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_addActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        searchproduct();       // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ADD();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void QNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QNActionPerformed
+        jButton5ActionPerformed(evt);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_QNActionPerformed
+
+    private void QQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QQActionPerformed
+        jButton7ActionPerformed(evt);        // TODO add your handling code here:
+    }//GEN-LAST:event_QQActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        updateproduct(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,7 +549,179 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog ADD;
+    private javax.swing.JLabel IDD;
+    private javax.swing.JTextField PN;
+    private javax.swing.JTextField PN1;
+    private javax.swing.JTextField PR;
+    private javax.swing.JTextField PRI;
+    private javax.swing.JTextField QN;
+    private javax.swing.JTextField QQ;
+    private javax.swing.JDialog UPS;
+    private javax.swing.JButton add;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField ser;
+    private javax.swing.JLabel sis;
+    private javax.swing.JTable tablesm;
+    private javax.swing.JButton upss;
     // End of variables declaration//GEN-END:variables
+public void ADD() {
+        String sPN = PN.getText();
+        String sPR = PR.getText();
+        String sQN = QN.getText();
+
+        if (sPN.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Product Name!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            PN.requestFocusInWindow();
+        } else if (sPR.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Price of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            PR.requestFocusInWindow();
+        } else if (sQN.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Quantity of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            QN.requestFocusInWindow();
+        }
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String conURL = "jdbc:mysql://localhost/loginact"
+                    + "?user=root&password=";
+            Connection con = DriverManager.getConnection(conURL);
+            PreparedStatement pstmt = con.prepareStatement("insert into name"
+                    + " (productName,price,Quality) "
+                    + "values (?,?,?)");
+            pstmt.setString(1, sPN);
+            pstmt.setString(2, sPR);
+            pstmt.setString(3, sQN);
+
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, sPN + " Successfully Added");
+            loadproduct();
+            PN.setText("");
+            PR.setText("");
+            QN.setText("");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void loadproduct() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String conURL = "jdbc:mysql://localhost/loginact"
+                    + "?user=root&password=";
+            Connection con = DriverManager.getConnection(conURL);
+            PreparedStatement pstmt = con.prepareStatement("select * from name");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            DefaultTableModel tblmodel = (DefaultTableModel) tablesm.getModel();
+            tblmodel.setRowCount(0);
+            while (rs.next()) {
+                tblmodel.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("productName"),
+                    rs.getString("price"),
+                    rs.getString("Quality")
+                });
+
+            }
+            sis.setText(tablesm.getRowCount() + "");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateproduct() {
+        String sIDD = IDD.getText();
+        String sPN1 = PN1.getText();
+        String sPRI = PRI.getText();
+        String sQQ = QQ.getText();
+        PN1.requestFocusInWindow();
+        if (sPN1.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Product Name!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            PN1.requestFocusInWindow();
+        } else if (sPRI.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Price of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            PRI.requestFocusInWindow();
+        } else if (sQQ.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Quantity of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            QQ.requestFocusInWindow();
+        }
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String conURL = "jdbc:mysql://localhost/loginact"
+                    + "?user=root&password=";
+            Connection con = DriverManager.getConnection(conURL);
+            PreparedStatement pstmt = con.prepareStatement("update name"
+                    + "set"
+                    + " productName=?,"
+                    + " price=?,"
+                    + " Quality=? "
+                    + "where id=?");
+            pstmt.setString(1, sIDD);
+            pstmt.setString(2, sPN1);
+            pstmt.setString(3, sPRI);
+            pstmt.setString(4, sQQ);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, sPN1 + "  Successfully Updated");
+            loadproduct();
+            PN1.setText("");
+            PRI.setText("");
+            QQ.setText("");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void searchproduct() {
+        String ssearch = ser.getText();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String conURL = "jdbc:mysql://localhost/loginact?"
+                    + "user=root&password=";
+            Connection con = DriverManager.getConnection(conURL);
+
+            String query = "(select * from tablesm "
+                    + "where product like ? )";
+            query = query + " ORDER BY product ";
+            PreparedStatement pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, "%" + ssearch + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            DefaultTableModel tblmodel = (DefaultTableModel) tablesm.getModel();
+            tblmodel.setRowCount(0);
+            while (rs.next()) {
+                tblmodel.addRow(new Object[]{rs.getString("id"),
+                    rs.getString("productName"),
+                    rs.getString("price"),
+                    rs.getString("Quality"),});
+            }
+
+            sis.setText(tablesm.getRowCount() + "");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
+
+
