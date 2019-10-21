@@ -351,6 +351,17 @@ public class Home extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButton3KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jButton3KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -434,34 +445,70 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_serKeyTyped
 
     private void upssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upssActionPerformed
-        int selRow = tablesm.getSelectedRow();
+         int selRow = tablesm.getSelectedRow();
         if (selRow != -1) {
-            String tid = tablesm
-            .getValueAt(selRow, 0).toString();
-            String tpr = tablesm
-            .getValueAt(selRow, 1).toString();
-            String tp = tablesm
-            .getValueAt(selRow, 2).toString();
-            String tqt = tablesm
-            .getValueAt(selRow, 3).toString();
+            String tID = tablesm
+                    .getValueAt(selRow, 0).toString();
+            String tP1 = tablesm
+                    .getValueAt(selRow, 1).toString();
+            String tQ1 = tablesm
+                    .getValueAt(selRow, 2).toString();
+            String tPR = tablesm
+                    .getValueAt(selRow, 3).toString();
 
-            IDD.setText(tid);
-            PN1.setText(tpr);
-            PRI.setText(tp);
-            QQ.setText(tqt);
+            IDD.setText(tID);
+            PN1.setText(tP1);
+            QQ.setText(tQ1);
+            PRI.setText(tPR);
 
             UPS.setVisible(true);
 
         } else {
             JOptionPane.showMessageDialog(rootPane, "Please select the row to be Updated!",
-                "No row selected",
-                JOptionPane.WARNING_MESSAGE);
+                    "No row selected",
+                    JOptionPane.WARNING_MESSAGE);
+        }// TODO add your handling code here:
+    }                                         
+
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int selRow = tablesm.getSelectedRow();
+        if (selRow != -1) {
+            int column = 0;
+            String id = tablesm
+                    .getValueAt(selRow, column).toString();
+            int ans = JOptionPane.showConfirmDialog(rootPane,
+                    "Are you sure you want to DELETE this Product?",
+                    "Delete Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (ans == JOptionPane.YES_OPTION) {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String conURL = "jdbc:mysql://localhost/liadocactivity"
+                            + "?user=root&password=";
+                    Connection con = DriverManager.getConnection(conURL);
+                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM producttable "
+                            + "WHERE id = ? ");
+                    pstmt.setString(1, id);
+                    pstmt.executeUpdate();
+
+                    JOptionPane.showMessageDialog(rootPane, "1 Row has Succesfully Deleted");
+                    
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select the row to be Deleted!",
+                    "No Row Selected",
+                    JOptionPane.WARNING_MESSAGE);
+
 
         }       // TODO add your handling code here:
     }//GEN-LAST:event_upssActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        int selRow = tablesm.getSelectedRow();
+         int selRow = tablesm.getSelectedRow();
         if (selRow != -1) {
             int column = 0;
             String ID = tablesm
@@ -477,7 +524,7 @@ public class Home extends javax.swing.JFrame {
                     String conURL = "jdbc:mysql://localhost/loginact"
                             + "?user=root&password=";
                     Connection con = DriverManager.getConnection(conURL);
-                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM prodtable "
+                    PreparedStatement pstmt = con.prepareStatement("DELETE FROM name "
                             + "WHERE ID = ? ");
                     pstmt.setString(1, ID);
                     pstmt.executeUpdate();
@@ -493,6 +540,7 @@ public class Home extends javax.swing.JFrame {
                     "No Row Selected",
                     JOptionPane.WARNING_MESSAGE);
 
+
         }
     }//GEN-LAST:event_deleteActionPerformed
     
@@ -502,7 +550,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_addActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-           // TODO add your handling code here:
+           SEARCH();// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -520,8 +568,21 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_QQActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        updateproduct(); // TODO add your handling code here:
+        UPS();
+       UPS.setVisible(false); // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+       SEARCH(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3KeyPressed
+
+    private void jButton3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyReleased
+        SEARCH();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3KeyReleased
+
+    private void jButton3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyTyped
+            SEARCH();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3KeyTyped
 
     /**
      * @param args the command line arguments
@@ -656,45 +717,81 @@ public void ADD() {
         }
     }
 
-    public void updateproduct() {
-        String sIDD = IDD.getText();
-        String sPN1 = PN1.getText();
-        String sPRI = PRI.getText();
-        String sQQ = QQ.getText();
+   public void UPS() {
+        String sID = IDD.getText();
+        String P1 = PN1.getText();
+        String Q1 = QQ.getText();
+        String PR = PRI.getText();
         PN1.requestFocusInWindow();
-        if (sPN1.isEmpty()) {
+        if (P1.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill the Product Name!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
             PN1.requestFocusInWindow();
-        } else if (sQQ.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill the Quantity of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
-            QQ.requestFocusInWindow();
-        } else if (sPRI.isEmpty()) {
+        } else if (Q1.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill the Price of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
+            QQ.requestFocusInWindow();
+        } else if (PR.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill the Quantity of Product!", "Empty!!!", JOptionPane.WARNING_MESSAGE);
             PRI.requestFocusInWindow();
+        }
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String conURL = "jdbc:mysql://localhost/loginact"
                     + "?user=root&password=";
             Connection con = DriverManager.getConnection(conURL);
-            PreparedStatement pstmt = con.prepareStatement("update prodtable"
+            PreparedStatement pstmt = con.prepareStatement("update name "
                     + "set"
-                    + " Product=?,"
+                    + " productName=?,"
                     + " Price=?,"
                     + " Quantity=? "
                     + "where ID=?");
-            pstmt.setString(1, sPN1);
-            pstmt.setString(2, sQQ);
-            pstmt.setString(3, sPRI);
-            pstmt.setString(4, sIDD);
+            pstmt.setString(1, P1);
+            pstmt.setString(2, Q1);
+            pstmt.setString(3, PR);
+            pstmt.setString(4, sID);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane, sPN1 + "  Successfully Updated");
+            JOptionPane.showMessageDialog(rootPane, P1 + " has Successfully Updated");
+            
             loadproduct();
+
             PN1.setText("");
             PRI.setText("");
             QQ.setText("");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+   }
 
-    }    }
+    private void SEARCH() {
+         String SEARCH = ser.getText();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String conURL = "jdbc:mysql://localhost/loginact?"
+                    + "user=root&password=";
+            Connection con = DriverManager.getConnection(conURL);
+
+            String query = "(select * from name "
+                    + "where productName like ? )";
+            query = query + " ORDER BY productName ";
+            PreparedStatement pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, "%" + SEARCH + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            DefaultTableModel tblmodel = (DefaultTableModel) tablesm.getModel();
+            tblmodel.setRowCount(0);
+            while (rs.next()) {
+                tblmodel.addRow(new Object[]{rs.getString("id"),
+                    rs.getString("productName"),
+                    rs.getString("Price"),
+                    rs.getString("Quantity"),});
+            }
+
+            sis.setText(tablesm.getRowCount() + "");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
